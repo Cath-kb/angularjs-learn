@@ -1,17 +1,25 @@
 <!doctype html>
 <html>
 <head>
-    <title>Example - example-guide-concepts-2-production</title>
+    <title>Example - example-controller-scope-inheritance-production</title>
     <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
     <script src="js/controllers/app.js"></script>
+    <link href="styles/app.css" rel="stylesheet" type="text/css">
 </head>
-<body ng-app="spicyApp2">
+<body ng-app="scopeInheritance">
 
-<div ng-controller="SpicyController">
-    <input ng-model="customSpice">
-    <button ng-click="spicy('chili')">Chili</button>
-    <button ng-click="spicy(customSpice)">Custom spice</button>
-    <p>The food is {{spice}} spicy!</p>
+<div class="spicy">
+  <div ng-controller="MainController">
+    <p>Good {{timeOfDay}}, {{name}}!</p>
+
+    <div ng-controller="ChildController">
+      <p>Good {{timeOfDay}}, {{name}}!</p>
+
+      <div ng-controller="GrandChildController">
+        <p>Good {{timeOfDay}}, {{name}}!</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>
