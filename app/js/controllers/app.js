@@ -1,9 +1,10 @@
 var myApp = angular.module('scopeExample', []);
 
-myApp.controller('MyController', ['$scope', function($scope) {
-  $scope.username = 'World';
+myApp.controller('GreetController', ['$scope', '$rootScope', function($scope, $rootScope) {
+  $scope.name = 'World';
+  $rootScope.department = 'AngularJS';
+}]);
 
-  $scope.sayHello = function() {
-    $scope.greeting = 'Hello ' + $scope.username + '!';
-  };
+myApp.controller('ListController', ['$scope', function($scope) {
+  $scope.names = ['Igor', 'Misko', 'Vojta'];
 }]);

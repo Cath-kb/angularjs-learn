@@ -1,18 +1,23 @@
 <!doctype html>
 <html>
 <head>
-    <title>Example - example-scope-data-model-production</title>
+    <title>Example - example-scope-hierarchies-production</title>
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+
     <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
     <script src="js/controllers/app.js"></script>
 </head>
 <body ng-app="scopeExample">
 
-<div ng-controller="MyController">
-  Your name:
-  <input type="text" ng-model="username">
-  <button ng-click='sayHello()'>greet</button>
-  <hr>
-  {{greeting}}
+<div class="show-scope-demo">
+  <div ng-controller="GreetController">
+    Hello {{name}}!
+  </div>
+  <div ng-controller="ListController">
+    <ol>
+      <li ng-repeat="name in names">{{name}} from {{department}}</li>
+    </ol>
+  </div>
 </div>
 
 </body>
