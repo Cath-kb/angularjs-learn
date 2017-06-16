@@ -1,21 +1,18 @@
-var myApp = angular.module('myReverseFilterApp', []);
+var myApp = angular.module('myStatefulFilterApp', []);
 
-myApp.filter('reverse', function() {
-  return function(input, uppercase) {
-    input = input || '';
-    var out = '';
-    for (var i = 0; i < input.length; i++) {
-      out = input.charAt(i) + out;
-    }
-    // conditional based on optional argument
-    if (uppercase) {
-      out = out.toUpperCase();
-    }
-    return out;
-  };
-});
+myApp.filter('decorate', ['decoration', function(decoration) {
 
-myApp.controller('MyController', ['$scope', 'reverseFilter', function($scope, reverseFilter) {
-    $scope.greeting = 'hello';
-    $scope.filteredGreeting = reverseFilter($scope.greeting);
+  function decorateFilter(input) {
+    return decoration.symbol + input + decoration.symbol;
+  }
+  decorateFilter.$stateful = true;
+
+  return decorateFilter;
 }]);
+
+myApp.controller('MyController', ['$scope', 'decoration', function($scope, decoration) {
+  $scope.greeting = 'hello';
+  $scope.decoration = decoration;
+}]);
+
+myApp.value('decoration', {symbol: '*'});

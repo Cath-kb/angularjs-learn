@@ -1,18 +1,17 @@
 <!doctype html>
 <html>
 <head>
-    <title>Example - example-filter-reverse-production</title>
+    <title>Example - example-filter-stateful-production</title>
     <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
     <script src="js/controllers/app.js"></script>
 </head>
-<body ng-app="myReverseFilterApp">
+<body ng-app="myStatefulFilterApp">
 
 <div ng-controller="MyController">
-  <input ng-model="greeting" type="text"><br>
+  Input: <input ng-model="greeting" type="text"><br>
+  Decoration: <input ng-model="decoration.symbol" type="text"><br>
   No filter: {{greeting}}<br>
-  Reverse: {{greeting|reverse}}<br>
-  Reverse + uppercase: {{greeting|reverse:true}}<br>
-  Reverse, filtered in controller: {{filteredGreeting}}
+  Decorated: {{greeting | decorate}}<br>
 </div>
 
 </body>
