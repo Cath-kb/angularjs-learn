@@ -1,13 +1,13 @@
-var myApp = angular.module('oneTimeBindingExampleApp', []);
+var myApp = angular.module('filterInControllerModule', []);
 
-myApp.controller('EventController', ['$scope', function($scope) {
-  var counter = 0;
-  var names = ['Igor', 'Misko', 'Chirayu', 'Lucas'];
-  /*
-   * expose the event object to the scope
-   */
-  $scope.clickMe = function(clickEvent) {
-    $scope.name = names[counter % names.length];
-    counter++;
-  };
+myApp.controller('FilterController', ['filterFilter', function FilterController(filterFilter) {
+  this.array = [
+    {name: 'Tobias'},
+    {name: 'Jeff'},
+    {name: 'Brian'},
+    {name: 'Igor'},
+    {name: 'James'},
+    {name: 'Brad'}
+  ];
+  this.filteredArray = filterFilter(this.array, 'a');
 }]);
