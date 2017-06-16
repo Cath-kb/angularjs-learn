@@ -1,16 +1,16 @@
 <!doctype html>
 <html>
 <head>
-    <title>Example - example-expression-events-production</title>
+    <title>Example - example-expression-one-time-production</title>
     <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
     <script src="js/controllers/app.js"></script>
 </head>
-<body ng-app="eventExampleApp">
+<body ng-app="oneTimeBindingExampleApp">
 
 <div ng-controller="EventController">
-  <button ng-click="clickMe($event)">Event</button>
-  <p><code>$event</code>: <pre> {{$event | json}}</pre></p>
-  <p><code>clickEvent</code>: <pre>{{clickEvent | json}}</pre></p>
+  <button ng-click="clickMe($event)">Click Me</button>
+  <p id="one-time-binding-example">One time binding: {{::name}}</p>
+  <p id="normal-binding-example">Normal binding: {{name}}</p>
 </div>
 
 </body>
