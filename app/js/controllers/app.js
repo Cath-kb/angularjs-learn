@@ -1,13 +1,21 @@
-var myApp = angular.module('filterInControllerModule', []);
+var myApp = angular.module('myReverseFilterApp', []);
 
-myApp.controller('FilterController', ['filterFilter', function FilterController(filterFilter) {
-  this.array = [
-    {name: 'Tobias'},
-    {name: 'Jeff'},
-    {name: 'Brian'},
-    {name: 'Igor'},
-    {name: 'James'},
-    {name: 'Brad'}
-  ];
-  this.filteredArray = filterFilter(this.array, 'a');
+myApp.filter('reverse', function() {
+  return function(input, uppercase) {
+    input = input || '';
+    var out = '';
+    for (var i = 0; i < input.length; i++) {
+      out = input.charAt(i) + out;
+    }
+    // conditional based on optional argument
+    if (uppercase) {
+      out = out.toUpperCase();
+    }
+    return out;
+  };
+});
+
+myApp.controller('MyController', ['$scope', 'reverseFilter', function($scope, reverseFilter) {
+    $scope.greeting = 'hello';
+    $scope.filteredGreeting = reverseFilter($scope.greeting);
 }]);
