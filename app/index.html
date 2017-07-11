@@ -1,23 +1,15 @@
 <!doctype html>
 <html>
 <head>
-    <title>Example - example-forms-modify-validators-production</title>
+    <title>Example - example-forms-custom-form-controls-production</title>
     <link rel="stylesheet" href="styles/main.css" type="text/css" />
     <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
     <script src="js/controllers/app.js"></script>
 </head>
-<body ng-app="form-example-modify-validators">
+<body ng-app="form-example2">
 
-<form name="form" class="css-form" novalidate>
-  <div>
-    <label>
-      Overwritten Email:
-      <input type="email" ng-model="myEmail" overwrite-email name="overwrittenEmail" />
-    </label>
-    <span ng-show="form.overwrittenEmail.$error.email">This email format is invalid!</span><br>
-    Model: {{myEmail}}
-  </div>
-</form>
+<div contentEditable="true" ng-model="content" title="Click to edit">Some</div>
+<pre>model = {{content}}</pre>
 
 </body>
 </html>

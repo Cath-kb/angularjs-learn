@@ -1,19 +1,21 @@
-var app = angular.module('form-example-modify-validators', []);
+var app = angular.module('form-example2', []);
 
-app.directive('overwriteEmail', function() {
-    var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@example\.com$/i;
-
+app.directive('contenteditable', function() {
     return {
-        require: '?ngModel',
+        require: 'ngModel',
         link: function(scope, elm, attrs, ctrl) {
-            // only apply the validator if ngModel is present and AngularJS has added the email validator
-            if (ctrl && ctrl.$validators.email) {
+            // view -> model
+            elm.on('blur', function() {
+                ctrl.$setViewValue(elm.html());
+            });
 
-                // this will overwrite the default AngularJS email validator
-                ctrl.$validators.email = function(modelValue) {
-                    return ctrl.$isEmpty(modelValue) || EMAIL_REGEXP.test(modelValue);
-                };
-            }
+            // model -> view
+            ctrl.$render = function() {
+                elm.html(ctrl.$viewValue);
+            };
+
+            // load init value from DOM
+            ctrl.$setViewValue(elm.html());
         }
     };
 });
