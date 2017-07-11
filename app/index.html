@@ -1,31 +1,22 @@
 <!doctype html>
 <html>
 <head>
-    <title>Example - example-forms-async-validation-production</title>
+    <title>Example - example-forms-modify-validators-production</title>
     <link rel="stylesheet" href="styles/main.css" type="text/css" />
     <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
     <script src="js/controllers/app.js"></script>
 </head>
-<body ng-app="form-example1">
+<body ng-app="form-example-modify-validators">
 
 <form name="form" class="css-form" novalidate>
   <div>
     <label>
-      Size (integer 0 - 10):
-      <input type="number" ng-model="size" name="size"
-             min="-10" max="10" integer /> {{size}}</label><br />
-    <span ng-show="form.size.$error.integer">The value is not a valid integer!</span>
-    <span ng-show="form.size.$error.min || form.size.$error.max">The value must be in range 0 to 10!</span>
+      Overwritten Email:
+      <input type="email" ng-model="myEmail" overwrite-email name="overwrittenEmail" />
+    </label>
+    <span ng-show="form.overwrittenEmail.$error.email">This email format is invalid!</span><br>
+    Model: {{myEmail}}
   </div>
-
-  <div>
-    <label>
-      Username:
-      <input type="text" ng-model="name" name="name" username />{{name}}</label><br />
-    <span ng-show="form.name.$pending.username">Checking if this name is available...</span>
-    <span ng-show="form.name.$error.username">This username is already taken!</span>
-  </div>
-
 </form>
 
 </body>

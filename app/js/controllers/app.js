@@ -1,56 +1,19 @@
-var app = angular.module('form-example1', []);
+var app = angular.module('form-example-modify-validators', []);
 
-var INTEGER_REGEXP = /^-?\d+$/;
-app.directive('integer', function() {
+app.directive('overwriteEmail', function() {
+    var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@example\.com$/i;
+
     return {
-        require: 'ngModel',
+        require: '?ngModel',
         link: function(scope, elm, attrs, ctrl) {
-            ctrl.$validators.integer = function(modelValue, viewValue) {
-                if (ctrl.$isEmpty(modelValue)) {
-                    // consider empty models to be valid
-                    return true;
-                }
+            // only apply the validator if ngModel is present and AngularJS has added the email validator
+            if (ctrl && ctrl.$validators.email) {
 
-                if (INTEGER_REGEXP.test(viewValue)) {
-                    // it is valid
-                    return true;
-                }
-
-                // it is invalid
-                return false;
-            };
-        }
-    };
-});
-
-app.directive('username', function($q, $timeout) {
-    return {
-        require: 'ngModel',
-        link: function(scope, elm, attrs, ctrl) {
-            var usernames = ['Jim', 'John', 'Jill', 'Jackie'];
-
-            ctrl.$asyncValidators.username = function(modelValue, viewValue) {
-
-                if (ctrl.$isEmpty(modelValue)) {
-                    // consider empty model valid
-                    return $q.resolve();
-                }
-
-                var def = $q.defer();
-
-                $timeout(function() {
-                    // Mock a delayed response
-                    if (usernames.indexOf(modelValue) === -1) {
-                        // The username is available
-                        def.resolve();
-                    } else {
-                        def.reject();
-                    }
-
-                }, 2000);
-
-                return def.promise;
-            };
+                // this will overwrite the default AngularJS email validator
+                ctrl.$validators.email = function(modelValue) {
+                    return ctrl.$isEmpty(modelValue) || EMAIL_REGEXP.test(modelValue);
+                };
+            }
         }
     };
 });
